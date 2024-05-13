@@ -1,11 +1,18 @@
-import { useState } from 'react';
 import { calculateWinner } from './calculateWinner';
 import { Square } from './Square';
 
 export function Board({ xIsNext, squares, onPlay }) {
- 
+  
   const winner = calculateWinner(squares);
   let status;
+
+
+  // Обработчик клика handleClick(i) срабатывает по клику на кнопку в конкретном Square
+  // Обрабатывает 3 сценария 
+  // 1. squares[i] уже или х или о - выход из обработчика
+  // 2. функция определения победителя вернула или х или о - выход из обработчика
+  // 3. Если следующих ход х то i тый элемент копии массива клеток записать х иначе записать о
+  // Далее значение копии массива всплывае через onPlay(nextSquares) в handlePlay(nextSquares) компаненты App.js
 
   function handleClick(i) {
     if (squares[i] || calculateWinner(squares)) return;
